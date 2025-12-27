@@ -1,0 +1,25 @@
+
+Training Evaluation:  2.729830265045166
+Quantum Kernel KMeans results:
+Accuracy: 0.8480, Precision: 0.9083, Recall: 0.7500, F1: 0.8216
+              precision    recall  f1-score   support
+
+           0     0.8102    0.9337    0.8676       800
+           1     0.9083    0.7500    0.8216       700
+
+    accuracy                         0.8480      1500
+   macro avg     0.8592    0.8419    0.8446      1500
+weighted avg     0.8560    0.8480    0.8461      1500
+
+Classical KMeans baseline on PCA reduced features (Euclidean)
+Training Evaluation:  0.003835916519165039
+Classical KMeans baseline results:
+Accuracy: 0.8667, Precision: 0.9496, Recall: 0.7543, F1: 0.8408
+              precision    recall  f1-score   support
+
+           0     0.8178    0.9650    0.8853       800
+           1     0.9496    0.7543    0.8408       700
+
+    accuracy                         0.8667      1500
+   macro avg     0.8837    0.8596    0.8630      1500
+weighted avg     0.8793    0.8667    0.8645      1500

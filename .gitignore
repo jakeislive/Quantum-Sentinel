@@ -1,0 +1,98 @@
+# ------------------------------
+# Python cache and compiled files
+# ------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+
+# ------------------------------
+# Virtual environments
+# ------------------------------
+venv/
+env/
+.venv/
+ENV/
+env.bak/
+
+# ------------------------------
+# Jupyter Notebook
+# ------------------------------
+.ipynb_checkpoints/
+.jupyter/
+# Optionally ignore notebook output if using nbstripout
+# *.ipynb
+
+# ------------------------------
+# Datasets and large files
+# ------------------------------
+data/
+datasets/
+*.csv
+*.tsv
+*.json
+*.xlsx
+*.zip
+*.tar.gz
+*.h5
+*.hdf5
+*.pkl
+*.joblib
+*.npy
+*.npz
+*.model
+*.ckpt
+*.pt
+*.pth
+*.onnx
+
+# Keep small sample data for demo/training
+!data/sample/
+!datasets/sample/
+
+# ------------------------------
+# Logs, results, and checkpoints
+# ------------------------------
+logs/
+*.log
+*.tmp
+*.swp
+outputs/
+results/
+runs/
+checkpoints/
+wandb/
+mlruns/
+tensorboard/
+lightning_logs/
+
+# ------------------------------
+# Environment and config files
+# ------------------------------
+*.env
+.env.*
+config.yaml
+config.yml
+
+# ------------------------------
+# IDE and editor settings
+# ------------------------------
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# ------------------------------
+# Packaging / build artifacts
+# ------------------------------
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# ------------------------------
+# System files
+# ------------------------------
+.DS_Store
+Thumbs.db
+__MACOSX/
+.cache/

@@ -1,0 +1,349 @@
+/mnt/slurm_nfs/j32abrah/ece-733-quantum-ml/src/model/quantum/vqc/vqc_quantum.py:234: DeprecationWarning: V1 Primitives are deprecated as of qiskit-machine-learning 0.8.0 and will be removed no sooner than 4 months after the release date. Use V2 primitives for continued compatibility and support.
+  vqc_qnn = EstimatorQNN(
+
+=== Train Distribution ===
+        class_label  samples     pct
+0            normal    67343  53.458
+1           neptune    41214  32.717
+2             satan     3633   2.884
+3           ipsweep     3599   2.857
+4         portsweep     2931   2.327
+5             smurf     2646   2.100
+6              nmap     1493   1.185
+7              back      956   0.759
+8          teardrop      892   0.708
+9       warezclient      890   0.707
+10              pod      201   0.160
+11     guess_passwd       53   0.042
+12  buffer_overflow       30   0.024
+13      warezmaster       20   0.016
+14             land       18   0.014
+15             imap       11   0.009
+16          rootkit       10   0.008
+17       loadmodule        9   0.007
+18        ftp_write        8   0.006
+19         multihop        7   0.006
+20              phf        4   0.003
+21             perl        3   0.002
+22              spy        2   0.002
+
+=== Test Distribution ===
+        class_label  samples     pct
+0            normal     9711  43.076
+1           neptune     4657  20.657
+2      guess_passwd     1231   5.460
+3             mscan      996   4.418
+4       warezmaster      944   4.187
+5           apache2      737   3.269
+6             satan      735   3.260
+7      processtable      685   3.039
+8             smurf      665   2.950
+9              back      359   1.592
+10        snmpguess      331   1.468
+11            saint      319   1.415
+12         mailbomb      293   1.300
+13    snmpgetattack      178   0.790
+14        portsweep      157   0.696
+15          ipsweep      141   0.625
+16       httptunnel      133   0.590
+17             nmap       73   0.324
+18              pod       41   0.182
+19  buffer_overflow       20   0.089
+20         multihop       18   0.080
+21            named       17   0.075
+22               ps       15   0.067
+23         sendmail       14   0.062
+24            xterm       13   0.058
+25          rootkit       13   0.058
+26         teardrop       12   0.053
+27            xlock        9   0.040
+28             land        7   0.031
+29           xsnoop        4   0.018
+30        ftp_write        3   0.013
+31       loadmodule        2   0.009
+32             worm        2   0.009
+33             perl        2   0.009
+34        sqlattack        2   0.009
+35         udpstorm        2   0.009
+36              phf        2   0.009
+37             imap        1   0.004
+
+=== Train Distribution ===
+    class_label  samples   pct
+0        normal      267  53.4
+1       neptune      164  32.8
+2       ipsweep       14   2.8
+3         satan       14   2.8
+4     portsweep       12   2.4
+5         smurf       10   2.0
+6          nmap        6   1.2
+7      teardrop        4   0.8
+8   warezclient        4   0.8
+9          back        4   0.8
+10          pod        1   0.2
+
+=== Test Distribution ===
+      class_label  samples   pct
+0          normal       45  45.0
+1         neptune       21  21.0
+2    guess_passwd        7   7.0
+3           mscan        5   5.0
+4     warezmaster        4   4.0
+5           smurf        3   3.0
+6           satan        3   3.0
+7    processtable        3   3.0
+8            nmap        2   2.0
+9         apache2        2   2.0
+10      snmpguess        2   2.0
+11  snmpgetattack        1   1.0
+12           back        1   1.0
+13      portsweep        1   1.0
+Train label counts:
+ label_binary
+0    267
+1    233
+Name: count, dtype: int64
+Test label counts:
+ label_binary
+1    55
+0    45
+Name: count, dtype: int64
+Processed shapes: X_train: (500, 101) X_test: (100, 101)
+Class weights: {np.int64(0): np.float64(0.9363295880149812), np.int64(1): np.float64(1.0729613733905579)}
+PCA fitted -> reduced to 2 dims and saved (pca_nsl_kdd.pkl).
+Torch tensor shapes: X_train: torch.Size([500, 2]) X_test: torch.Size([100, 2])
+Epoch 1/200 — Loss: 0.699326
+Epoch 2/200 — Loss: 0.698008
+Epoch 3/200 — Loss: 0.696885
+Epoch 4/200 — Loss: 0.695824
+Epoch 5/200 — Loss: 0.694989
+Epoch 6/200 — Loss: 0.694218
+Epoch 7/200 — Loss: 0.693566
+Epoch 8/200 — Loss: 0.692985
+Epoch 9/200 — Loss: 0.692491
+Epoch 10/200 — Loss: 0.692091
+Epoch 11/200 — Loss: 0.691682
+Epoch 12/200 — Loss: 0.691345
+Epoch 13/200 — Loss: 0.690997
+Epoch 14/200 — Loss: 0.690589
+Epoch 15/200 — Loss: 0.690120
+Epoch 16/200 — Loss: 0.689524
+Epoch 17/200 — Loss: 0.688889
+Epoch 18/200 — Loss: 0.688006
+Epoch 19/200 — Loss: 0.686951
+Epoch 20/200 — Loss: 0.685670
+Epoch 21/200 — Loss: 0.684158
+Epoch 22/200 — Loss: 0.682337
+Epoch 23/200 — Loss: 0.680420
+Epoch 24/200 — Loss: 0.678255
+Epoch 25/200 — Loss: 0.675936
+Epoch 26/200 — Loss: 0.673604
+Epoch 27/200 — Loss: 0.671235
+Epoch 28/200 — Loss: 0.668808
+Epoch 29/200 — Loss: 0.666534
+Epoch 30/200 — Loss: 0.664240
+Epoch 31/200 — Loss: 0.662101
+Epoch 32/200 — Loss: 0.660014
+Epoch 33/200 — Loss: 0.657978
+Epoch 34/200 — Loss: 0.656130
+Epoch 35/200 — Loss: 0.654293
+Epoch 36/200 — Loss: 0.652617
+Epoch 37/200 — Loss: 0.650957
+Epoch 38/200 — Loss: 0.649439
+Epoch 39/200 — Loss: 0.647981
+Epoch 40/200 — Loss: 0.646531
+Epoch 41/200 — Loss: 0.645078
+Epoch 42/200 — Loss: 0.643803
+Epoch 43/200 — Loss: 0.642556
+Epoch 44/200 — Loss: 0.641265
+Epoch 45/200 — Loss: 0.640045
+Epoch 46/200 — Loss: 0.638831
+Epoch 47/200 — Loss: 0.637665
+Epoch 48/200 — Loss: 0.636432
+Epoch 49/200 — Loss: 0.635287
+Epoch 50/200 — Loss: 0.634171
+Epoch 51/200 — Loss: 0.633089
+Epoch 52/200 — Loss: 0.631987
+Epoch 53/200 — Loss: 0.630889
+Epoch 54/200 — Loss: 0.629863
+Epoch 55/200 — Loss: 0.628803
+Epoch 56/200 — Loss: 0.627796
+Epoch 57/200 — Loss: 0.626746
+Epoch 58/200 — Loss: 0.625802
+Epoch 59/200 — Loss: 0.624748
+Epoch 60/200 — Loss: 0.623847
+Epoch 61/200 — Loss: 0.622798
+Epoch 62/200 — Loss: 0.621848
+Epoch 63/200 — Loss: 0.620895
+Epoch 64/200 — Loss: 0.619936
+Epoch 65/200 — Loss: 0.619086
+Epoch 66/200 — Loss: 0.618116
+Epoch 67/200 — Loss: 0.617226
+Epoch 68/200 — Loss: 0.616353
+Epoch 69/200 — Loss: 0.615406
+Epoch 70/200 — Loss: 0.614560
+Epoch 71/200 — Loss: 0.613659
+Epoch 72/200 — Loss: 0.612901
+Epoch 73/200 — Loss: 0.612015
+Epoch 74/200 — Loss: 0.611160
+Epoch 75/200 — Loss: 0.610324
+Epoch 76/200 — Loss: 0.609520
+Epoch 77/200 — Loss: 0.608775
+Epoch 78/200 — Loss: 0.607950
+Epoch 79/200 — Loss: 0.607119
+Epoch 80/200 — Loss: 0.606346
+Epoch 81/200 — Loss: 0.605594
+Epoch 82/200 — Loss: 0.604812
+Epoch 83/200 — Loss: 0.604057
+Epoch 84/200 — Loss: 0.603319
+Epoch 85/200 — Loss: 0.602634
+Epoch 86/200 — Loss: 0.601931
+Epoch 87/200 — Loss: 0.601282
+Epoch 88/200 — Loss: 0.600488
+Epoch 89/200 — Loss: 0.599769
+Epoch 90/200 — Loss: 0.599217
+Epoch 91/200 — Loss: 0.598524
+Epoch 92/200 — Loss: 0.597854
+Epoch 93/200 — Loss: 0.597120
+Epoch 94/200 — Loss: 0.596673
+Epoch 95/200 — Loss: 0.595893
+Epoch 96/200 — Loss: 0.595282
+Epoch 97/200 — Loss: 0.594543
+Epoch 98/200 — Loss: 0.594013
+Epoch 99/200 — Loss: 0.593437
+Epoch 100/200 — Loss: 0.592811
+Epoch 101/200 — Loss: 0.592268
+Epoch 102/200 — Loss: 0.591680
+Epoch 103/200 — Loss: 0.591078
+Epoch 104/200 — Loss: 0.590520
+Epoch 105/200 — Loss: 0.589975
+Epoch 106/200 — Loss: 0.589434
+Epoch 107/200 — Loss: 0.588910
+Epoch 108/200 — Loss: 0.588395
+Epoch 109/200 — Loss: 0.587901
+Epoch 110/200 — Loss: 0.587325
+Epoch 111/200 — Loss: 0.586818
+Epoch 112/200 — Loss: 0.586300
+Epoch 113/200 — Loss: 0.585816
+Epoch 114/200 — Loss: 0.585301
+Epoch 115/200 — Loss: 0.585000
+Epoch 116/200 — Loss: 0.584302
+Epoch 117/200 — Loss: 0.583847
+Epoch 118/200 — Loss: 0.583527
+Epoch 119/200 — Loss: 0.582966
+Epoch 120/200 — Loss: 0.582415
+Epoch 121/200 — Loss: 0.582047
+Epoch 122/200 — Loss: 0.581591
+Epoch 123/200 — Loss: 0.581160
+Epoch 124/200 — Loss: 0.580659
+Epoch 125/200 — Loss: 0.580286
+Epoch 126/200 — Loss: 0.579818
+Epoch 127/200 — Loss: 0.579439
+Epoch 128/200 — Loss: 0.579109
+Epoch 129/200 — Loss: 0.578598
+Epoch 130/200 — Loss: 0.578215
+Epoch 131/200 — Loss: 0.577881
+Epoch 132/200 — Loss: 0.577551
+Epoch 133/200 — Loss: 0.577038
+Epoch 134/200 — Loss: 0.576701
+Epoch 135/200 — Loss: 0.576271
+Epoch 136/200 — Loss: 0.575888
+Epoch 137/200 — Loss: 0.575604
+Epoch 138/200 — Loss: 0.575208
+Epoch 139/200 — Loss: 0.574865
+Epoch 140/200 — Loss: 0.574467
+Epoch 141/200 — Loss: 0.574087
+Epoch 142/200 — Loss: 0.573836
+Epoch 143/200 — Loss: 0.573400
+Epoch 144/200 — Loss: 0.573139
+Epoch 145/200 — Loss: 0.572821
+Epoch 146/200 — Loss: 0.572649
+Epoch 147/200 — Loss: 0.572188
+Epoch 148/200 — Loss: 0.571829
+Epoch 149/200 — Loss: 0.571582
+Epoch 150/200 — Loss: 0.571220
+Epoch 151/200 — Loss: 0.570875
+Epoch 152/200 — Loss: 0.570674
+Epoch 153/200 — Loss: 0.570330
+Epoch 154/200 — Loss: 0.570031
+Epoch 155/200 — Loss: 0.569775
+Epoch 156/200 — Loss: 0.569422
+Epoch 157/200 — Loss: 0.569138
+Epoch 158/200 — Loss: 0.568931
+Epoch 159/200 — Loss: 0.568700
+Epoch 160/200 — Loss: 0.568330
+Epoch 161/200 — Loss: 0.568095
+Epoch 162/200 — Loss: 0.567804
+Epoch 163/200 — Loss: 0.567580
+Epoch 164/200 — Loss: 0.567263
+Epoch 165/200 — Loss: 0.567082
+Epoch 166/200 — Loss: 0.566824
+Epoch 167/200 — Loss: 0.566531
+Epoch 168/200 — Loss: 0.566369
+Epoch 169/200 — Loss: 0.566072
+Epoch 170/200 — Loss: 0.565830
+Epoch 171/200 — Loss: 0.565800
+Epoch 172/200 — Loss: 0.565373
+Epoch 173/200 — Loss: 0.565147
+Epoch 174/200 — Loss: 0.564939
+Epoch 175/200 — Loss: 0.564795
+Epoch 176/200 — Loss: 0.564482
+Epoch 177/200 — Loss: 0.564273
+Epoch 178/200 — Loss: 0.564021
+Epoch 179/200 — Loss: 0.563910
+Epoch 180/200 — Loss: 0.563627
+Epoch 181/200 — Loss: 0.563518
+Epoch 182/200 — Loss: 0.563229
+Epoch 183/200 — Loss: 0.563111
+Epoch 184/200 — Loss: 0.562840
+Epoch 185/200 — Loss: 0.562795
+Epoch 186/200 — Loss: 0.562540
+Epoch 187/200 — Loss: 0.562262
+Epoch 188/200 — Loss: 0.562081
+Epoch 189/200 — Loss: 0.561885
+Epoch 190/200 — Loss: 0.561738
+Epoch 191/200 — Loss: 0.561528
+Epoch 192/200 — Loss: 0.561364
+Epoch 193/200 — Loss: 0.561298
+Epoch 194/200 — Loss: 0.561046
+Epoch 195/200 — Loss: 0.560834
+Epoch 196/200 — Loss: 0.560663
+Epoch 197/200 — Loss: 0.560554
+Epoch 198/200 — Loss: 0.560352
+Epoch 199/200 — Loss: 0.560196
+Epoch 200/200 — Loss: 0.560009
+Training time: 1223.68 seconds
+Logits: tensor([-1.3447,  0.9990, -0.9197, -0.8030, -0.5747,  1.1959, -0.4595, -0.4618,
+        -1.6097, -1.5923, -0.8899, -1.5753,  1.0021, -0.5775, -0.5641,  0.3618,
+        -0.5379, -0.3887,  0.3792, -0.1829, -1.6136, -0.9409, -1.5968, -0.8436,
+         1.0988,  0.1371, -1.0976, -0.8494, -0.3747,  0.7356, -0.7591,  0.4076,
+        -0.0469,  0.9240, -0.7872, -0.8265, -1.2304,  0.7506,  1.2021, -1.2491,
+         1.1056, -0.4114,  0.4441, -1.6127, -0.2018, -1.1821, -1.5342, -0.2241,
+         0.8741, -1.5339, -1.5371,  0.1438, -0.1006, -1.1493, -0.8176, -1.5730,
+        -0.4345, -1.5504, -1.2785, -0.4481, -0.4755, -0.6270,  0.0423, -0.0381,
+         0.2773,  0.3107, -0.0191,  0.1763, -0.5732,  0.1662, -0.0547, -0.6113,
+        -0.2195, -1.1044, -0.8882, -1.0408, -0.4874, -0.2532, -1.3403,  0.7436,
+         1.1912,  1.1638, -0.2276, -1.3210,  1.0515, -1.4427, -0.3243,  0.8423,
+         0.3853, -0.2593, -1.1650, -1.2864, -1.3091,  0.4441,  0.9695,  0.8754,
+        -0.6596, -0.3776, -0.2213,  0.0355])
+Probabilities: tensor([0.2067, 0.7309, 0.2850, 0.3094, 0.3602, 0.7678, 0.3871, 0.3866, 0.1666,
+        0.1691, 0.2911, 0.1715, 0.7315, 0.3595, 0.3626, 0.5895, 0.3687, 0.4040,
+        0.5937, 0.4544, 0.1661, 0.2807, 0.1684, 0.3008, 0.7500, 0.5342, 0.2502,
+        0.2995, 0.4074, 0.6760, 0.3188, 0.6005, 0.4883, 0.7158, 0.3128, 0.3044,
+        0.2261, 0.6793, 0.7689, 0.2228, 0.7513, 0.3986, 0.6092, 0.1662, 0.4497,
+        0.2347, 0.1774, 0.4442, 0.7056, 0.1774, 0.1770, 0.5359, 0.4749, 0.2406,
+        0.3063, 0.1718, 0.3930, 0.1750, 0.2178, 0.3898, 0.3833, 0.3482, 0.5106,
+        0.4905, 0.5689, 0.5771, 0.4952, 0.5440, 0.3605, 0.5415, 0.4863, 0.3518,
+        0.4453, 0.2489, 0.2915, 0.2610, 0.3805, 0.4370, 0.2075, 0.6778, 0.7670,
+        0.7620, 0.4434, 0.2107, 0.7411, 0.1911, 0.4196, 0.6990, 0.5951, 0.4355,
+        0.2378, 0.2165, 0.2126, 0.6092, 0.7250, 0.7059, 0.3408, 0.4067, 0.4449,
+        0.5089])
+Predictions: tensor([0., 1., 0., 0., 0., 1., 0., 0., 0., 0., 0., 0., 1., 0., 0., 1., 0., 0.,
+        1., 0., 0., 0., 0., 0., 1., 1., 0., 0., 0., 1., 0., 1., 0., 1., 0., 0.,
+        0., 1., 1., 0., 1., 0., 1., 0., 0., 0., 0., 0., 1., 0., 0., 1., 0., 0.,
+        0., 0., 0., 0., 0., 0., 0., 0., 1., 0., 1., 1., 0., 1., 0., 1., 0., 0.,
+        0., 0., 0., 0., 0., 0., 0., 1., 1., 1., 0., 0., 1., 0., 0., 1., 1., 0.,
+        0., 0., 0., 1., 1., 1., 0., 0., 0., 1.])
+Test Accuracy: 68.00%
+Evaluation time: 0.07 seconds
+Saved QVC classifier state to vqc_nsl_kdd_torch.pth

@@ -1,0 +1,32 @@
+Train label counts:
+ label_binary
+0    67343
+1    58630
+Name: count, dtype: int64
+Test label counts:
+ label_binary
+1    12833
+0     9711
+Name: count, dtype: int64
+Processed shapes: X_train: (125973, 122) X_test: (22544, 122)
+Class weights: {np.int64(0): np.float64(0.9353087923020953), np.int64(1): np.float64(1.0743049633293535)}
+Saved scaler: standard_scaler_nsl_kdd.pkl
+Training time: 433.97 seconds
+Evaluation time: 10.11 seconds
+
+Test accuracy:     0.7516412349183819
+
+Classification report (test):
+               precision    recall  f1-score   support
+
+           0     0.6487    0.9235    0.7621      9711
+           1     0.9148    0.6216    0.7402     12833
+
+    accuracy                         0.7516     22544
+   macro avg     0.7818    0.7725    0.7512     22544
+weighted avg     0.8002    0.7516    0.7496     22544
+
+Confusion matrix (test):
+ [[8968  743]
+ [4856 7977]]
+Saved: svm_nsl_kdd_train_model.pkl, ohe_nsl_kdd.pkl, and standard_scaler_nsl_kdd.pkl

@@ -1,0 +1,21 @@
+Accuracy: 0.7780, Precision: 0.9922, Recall: 0.5378, F1: 0.6975
+              precision    recall  f1-score   support
+
+           0     0.7035    0.9962    0.8246       262
+           1     0.9922    0.5378    0.6975       238
+
+    accuracy                         0.7780       500
+   macro avg     0.8479    0.7670    0.7611       500
+weighted avg     0.8409    0.7780    0.7641       500
+
+Classical KMeans baseline on PCA reduced features (Euclidean)
+Classical KMeans baseline results:
+Accuracy: 0.5960, Precision: 0.8000, Recall: 0.2017, F1: 0.3221
+              precision    recall  f1-score   support
+
+           0     0.5682    0.9542    0.7123       262
+           1     0.8000    0.2017    0.3221       238
+
+    accuracy                         0.5960       500
+   macro avg     0.6841    0.5779    0.5172       500
+weighted avg     0.6785    0.5960    0.5266       500

@@ -1,0 +1,199 @@
+/mnt/slurm_nfs/j32abrah/ece-733-quantum-ml/src/model/quantum/qcnn/qcnn_quantum.py:271: DeprecationWarning: V1 Primitives are deprecated as of qiskit-machine-learning 0.8.0 and will be removed no sooner than 4 months after the release date. Use V2 primitives for continued compatibility and support.
+  qnn = EstimatorQNN(
+
+=== Train Distribution ===
+        class_label  samples     pct
+0            normal    67343  53.458
+1           neptune    41214  32.717
+2             satan     3633   2.884
+3           ipsweep     3599   2.857
+4         portsweep     2931   2.327
+5             smurf     2646   2.100
+6              nmap     1493   1.185
+7              back      956   0.759
+8          teardrop      892   0.708
+9       warezclient      890   0.707
+10              pod      201   0.160
+11     guess_passwd       53   0.042
+12  buffer_overflow       30   0.024
+13      warezmaster       20   0.016
+14             land       18   0.014
+15             imap       11   0.009
+16          rootkit       10   0.008
+17       loadmodule        9   0.007
+18        ftp_write        8   0.006
+19         multihop        7   0.006
+20              phf        4   0.003
+21             perl        3   0.002
+22              spy        2   0.002
+
+=== Test Distribution ===
+        class_label  samples     pct
+0            normal     9711  43.076
+1           neptune     4657  20.657
+2      guess_passwd     1231   5.460
+3             mscan      996   4.418
+4       warezmaster      944   4.187
+5           apache2      737   3.269
+6             satan      735   3.260
+7      processtable      685   3.039
+8             smurf      665   2.950
+9              back      359   1.592
+10        snmpguess      331   1.468
+11            saint      319   1.415
+12         mailbomb      293   1.300
+13    snmpgetattack      178   0.790
+14        portsweep      157   0.696
+15          ipsweep      141   0.625
+16       httptunnel      133   0.590
+17             nmap       73   0.324
+18              pod       41   0.182
+19  buffer_overflow       20   0.089
+20         multihop       18   0.080
+21            named       17   0.075
+22               ps       15   0.067
+23         sendmail       14   0.062
+24            xterm       13   0.058
+25          rootkit       13   0.058
+26         teardrop       12   0.053
+27            xlock        9   0.040
+28             land        7   0.031
+29           xsnoop        4   0.018
+30        ftp_write        3   0.013
+31       loadmodule        2   0.009
+32             worm        2   0.009
+33             perl        2   0.009
+34        sqlattack        2   0.009
+35         udpstorm        2   0.009
+36              phf        2   0.009
+37             imap        1   0.004
+
+=== Train Distribution ===
+    class_label  samples   pct
+0        normal      267  53.4
+1       neptune      164  32.8
+2       ipsweep       14   2.8
+3         satan       14   2.8
+4     portsweep       12   2.4
+5         smurf       10   2.0
+6          nmap        6   1.2
+7      teardrop        4   0.8
+8   warezclient        4   0.8
+9          back        4   0.8
+10          pod        1   0.2
+
+=== Test Distribution ===
+      class_label  samples   pct
+0          normal       45  45.0
+1         neptune       21  21.0
+2    guess_passwd        7   7.0
+3           mscan        5   5.0
+4     warezmaster        4   4.0
+5           smurf        3   3.0
+6           satan        3   3.0
+7    processtable        3   3.0
+8            nmap        2   2.0
+9         apache2        2   2.0
+10      snmpguess        2   2.0
+11  snmpgetattack        1   1.0
+12           back        1   1.0
+13      portsweep        1   1.0
+Train label counts:
+ label_binary
+0    267
+1    233
+Name: count, dtype: int64
+Test label counts:
+ label_binary
+1    55
+0    45
+Name: count, dtype: int64
+Processed shapes: X_train: (500, 101) X_test: (100, 101)
+Class weights: {np.int64(0): np.float64(0.9363295880149812), np.int64(1): np.float64(1.0729613733905579)}
+PCA shapes: X_train: (500, 4) X_test: (100, 4)
+Torch tensor shapes: X_train: torch.Size([500, 4]) X_test: torch.Size([100, 4])
+Epoch 1/50 — Loss: 0.709141
+Epoch 2/50 — Loss: 0.704196
+Epoch 3/50 — Loss: 0.698816
+Epoch 4/50 — Loss: 0.693394
+Epoch 5/50 — Loss: 0.687849
+Epoch 6/50 — Loss: 0.682649
+Epoch 7/50 — Loss: 0.677502
+Epoch 8/50 — Loss: 0.672591
+Epoch 9/50 — Loss: 0.667821
+Epoch 10/50 — Loss: 0.663368
+Epoch 11/50 — Loss: 0.658792
+Epoch 12/50 — Loss: 0.654590
+Epoch 13/50 — Loss: 0.650363
+Epoch 14/50 — Loss: 0.646110
+Epoch 15/50 — Loss: 0.641928
+Epoch 16/50 — Loss: 0.637873
+Epoch 17/50 — Loss: 0.633983
+Epoch 18/50 — Loss: 0.629663
+Epoch 19/50 — Loss: 0.625590
+Epoch 20/50 — Loss: 0.621414
+Epoch 21/50 — Loss: 0.617420
+Epoch 22/50 — Loss: 0.613084
+Epoch 23/50 — Loss: 0.608845
+Epoch 24/50 — Loss: 0.604632
+Epoch 25/50 — Loss: 0.600154
+Epoch 26/50 — Loss: 0.595861
+Epoch 27/50 — Loss: 0.591247
+Epoch 28/50 — Loss: 0.586654
+Epoch 29/50 — Loss: 0.581967
+Epoch 30/50 — Loss: 0.577387
+Epoch 31/50 — Loss: 0.572610
+Epoch 32/50 — Loss: 0.568008
+Epoch 33/50 — Loss: 0.563271
+Epoch 34/50 — Loss: 0.558627
+Epoch 35/50 — Loss: 0.553960
+Epoch 36/50 — Loss: 0.549503
+Epoch 37/50 — Loss: 0.544922
+Epoch 38/50 — Loss: 0.540587
+Epoch 39/50 — Loss: 0.536270
+Epoch 40/50 — Loss: 0.532037
+Epoch 41/50 — Loss: 0.527820
+Epoch 42/50 — Loss: 0.523872
+Epoch 43/50 — Loss: 0.519942
+Epoch 44/50 — Loss: 0.516107
+Epoch 45/50 — Loss: 0.512225
+Epoch 46/50 — Loss: 0.508613
+Epoch 47/50 — Loss: 0.504987
+Epoch 48/50 — Loss: 0.501436
+Epoch 49/50 — Loss: 0.497958
+Epoch 50/50 — Loss: 0.494609
+Training time: 9688.19 seconds
+Logits: tensor([-0.5313,  0.6368, -0.5896, -0.8510, -0.8227, -0.2954, -0.5873, -1.0020,
+        -0.8832, -0.9323,  0.6270, -0.8401,  0.6334, -0.1359, -0.0889,  0.0459,
+        -0.8464, -0.8772, -1.1000, -0.3239, -0.8430,  0.2752, -0.8622, -0.4747,
+         0.5732, -0.1484, -1.0815, -0.2107, -1.0139,  0.6106, -1.1581, -0.0114,
+        -0.8502,  0.5161, -1.0604, -0.4763, -0.8453,  0.6150, -0.3938,  0.1815,
+         0.6287, -0.8491, -1.0234, -0.7439, -0.8522,  0.4544, -0.5523, -0.9952,
+        -0.5521, -0.5546, -0.5553, -0.0704, -0.1164, -0.9176, -1.1388, -0.9463,
+        -0.9794, -0.3463, -1.0735, -1.1382, -0.9348, -1.0033, -0.0432,  0.2368,
+        -0.2522,  0.1966, -0.1704, -0.0451, -0.2701, -0.0636, -0.1654, -0.9394,
+        -0.8776, -0.4286, -0.8717, -0.9261,  0.3810, -0.9130, -1.0625,  0.5678,
+        -0.8759, -0.2857, -0.8581, -0.9879,  0.6517, -0.3699, -0.8886,  0.6618,
+         0.1952,  0.3023, -0.7880, -1.0280, -0.0444, -0.9739,  0.6332, -0.4908,
+        -1.0726, -0.8647, -0.0883, -0.0616])
+Probabilities: tensor([0.3702, 0.6540, 0.3567, 0.2992, 0.3052, 0.4267, 0.3573, 0.2686, 0.2925,
+        0.2825, 0.6518, 0.3015, 0.6533, 0.4661, 0.4778, 0.5115, 0.3002, 0.2938,
+        0.2497, 0.4197, 0.3009, 0.5684, 0.2969, 0.3835, 0.6395, 0.4630, 0.2532,
+        0.4475, 0.2662, 0.6481, 0.2390, 0.4971, 0.2994, 0.6262, 0.2572, 0.3831,
+        0.3004, 0.6491, 0.4028, 0.5452, 0.6522, 0.2996, 0.2644, 0.3221, 0.2990,
+        0.6117, 0.3653, 0.2699, 0.3654, 0.3648, 0.3646, 0.4824, 0.4709, 0.2855,
+        0.2425, 0.2796, 0.2730, 0.4143, 0.2547, 0.2427, 0.2820, 0.2683, 0.4892,
+        0.5589, 0.4373, 0.5490, 0.4575, 0.4887, 0.4329, 0.4841, 0.4587, 0.2810,
+        0.2937, 0.3945, 0.2949, 0.2837, 0.5941, 0.2864, 0.2568, 0.6383, 0.2940,
+        0.4291, 0.2977, 0.2713, 0.6574, 0.4086, 0.2914, 0.6597, 0.5486, 0.5750,
+        0.3126, 0.2635, 0.4889, 0.2741, 0.6532, 0.3797, 0.2549, 0.2964, 0.4779,
+        0.4846])
+Predictions: tensor([0., 1., 0., 0., 0., 0., 0., 0., 0., 0., 1., 0., 1., 0., 0., 1., 0., 0.,
+        0., 0., 0., 1., 0., 0., 1., 0., 0., 0., 0., 1., 0., 0., 0., 1., 0., 0.,
+        0., 1., 0., 1., 1., 0., 0., 0., 0., 1., 0., 0., 0., 0., 0., 0., 0., 0.,
+        0., 0., 0., 0., 0., 0., 0., 0., 0., 1., 0., 1., 0., 0., 0., 0., 0., 0.,
+        0., 0., 0., 0., 1., 0., 0., 1., 0., 0., 0., 0., 1., 0., 0., 1., 1., 1.,
+        0., 0., 0., 0., 1., 0., 0., 0., 0., 0.])
+Test Accuracy: 62.00%
+Evaluation time: 0.24 seconds
+Saved QCNN classifier state to qcnn_nsl_kdd_torch.pth

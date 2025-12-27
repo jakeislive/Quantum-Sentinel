@@ -1,0 +1,85 @@
+/mnt/slurm_nfs/j32abrah/ece-733-quantum-ml/src/model/quantum/qsvm/cicids_svm_quantum.py:46: DtypeWarning: Columns (0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77) have mixed types. Specify dtype option on import or set low_memory=False.
+  return pd.read_csv(path, header=None, names=columns, sep=",", skipinitialspace=True)
+/mnt/slurm_nfs/j32abrah/ece-733-quantum-ml/src/model/quantum/qsvm/cicids_svm_quantum.py:174: DeprecationWarning: The class ``qiskit.primitives.sampler.Sampler`` is deprecated as of qiskit 1.2. It will be removed no earlier than 3 months after the release date. All implementations of the `BaseSamplerV1` interface have been deprecated in favor of their V2 counterparts. The V2 alternative for the `Sampler` class is `StatevectorSampler`.
+  sampler = Sampler()
+/mnt/slurm_nfs/j32abrah/ece-733-quantum-ml/src/model/quantum/qsvm/cicids_svm_quantum.py:176: DeprecationWarning: V1 Primitives are deprecated as of qiskit-machine-learning 0.8.0 and will be removed no sooner than 4 months after the release date. Use V2 primitives for continued compatibility and support.
+  fidelity = ComputeUncompute(sampler=sampler)
+/mnt/slurm_nfs/f5awan/miniconda3/envs/nsganet_cuda_env2/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1731: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/mnt/slurm_nfs/f5awan/miniconda3/envs/nsganet_cuda_env2/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1731: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+/mnt/slurm_nfs/f5awan/miniconda3/envs/nsganet_cuda_env2/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1731: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+
+=== Data Distribution ===
+                   class_label  samples     pct
+0                       BENIGN  2273097  80.300
+1                     DoS Hulk   231073   8.163
+2                     PortScan   158930   5.614
+3                         DDoS   128027   4.523
+4                DoS GoldenEye    10293   0.364
+5                  FTP-Patator     7938   0.280
+6                  SSH-Patator     5897   0.208
+7                DoS slowloris     5796   0.205
+8             DoS Slowhttptest     5499   0.194
+9                          Bot     1966   0.069
+10    Web Attack � Brute Force     1507   0.053
+11            Web Attack � XSS      652   0.023
+12                Infiltration       36   0.001
+13  Web Attack � Sql Injection       21   0.001
+14                  Heartbleed       11   0.000
+15                       Label        1   0.000
+
+=== Train Distribution ===
+                class_label  samples   pct
+0                    BENIGN      404  80.8
+1                  DoS Hulk       40   8.0
+2                  PortScan       24   4.8
+3                      DDoS       21   4.2
+4               FTP-Patator        4   0.8
+5             DoS GoldenEye        3   0.6
+6          DoS Slowhttptest        1   0.2
+7  Web Attack � Brute Force        1   0.2
+8             DoS slowloris        1   0.2
+9               SSH-Patator        1   0.2
+
+=== Test Distribution ===
+     class_label  samples   pct
+0         BENIGN      169  84.5
+1           DDoS       13   6.5
+2       DoS Hulk        9   4.5
+3       PortScan        6   3.0
+4  DoS slowloris        1   0.5
+5    SSH-Patator        1   0.5
+6  DoS GoldenEye        1   0.5
+Train label counts:
+ label_binary
+0    404
+1     96
+Name: count, dtype: int64
+Test label counts:
+ label_binary
+0    169
+1     31
+Name: count, dtype: int64
+Class weights: {np.int64(0): np.float64(0.6188118811881188), np.int64(1): np.float64(2.6041666666666665)}
+PCA fitted -> reduced to 2 dims and saved (pca_nsl_kdd.pkl).
+Training time: 174.54 seconds
+Evaluation time: 292.01 seconds
+QSVC classification test score: 0.845
+
+Test accuracy:     0.845
+
+Classification report (test):
+               precision    recall  f1-score   support
+
+           0     0.8450    1.0000    0.9160       169
+           1     0.0000    0.0000    0.0000        31
+
+    accuracy                         0.8450       200
+   macro avg     0.4225    0.5000    0.4580       200
+weighted avg     0.7140    0.8450    0.7740       200
+
+Confusion matrix (test):
+ [[169   0]
+ [ 31   0]]

@@ -1,0 +1,83 @@
+/mnt/slurm_nfs/j32abrah/ece-733-quantum-ml/src/model/classical/svm/cicids_svm_classical.py:38: DtypeWarning: Columns (0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77) have mixed types. Specify dtype option on import or set low_memory=False.
+  return pd.read_csv(path, header=None, names=columns, sep=",", skipinitialspace=True)
+
+=== Data Distribution ===
+                   class_label  samples     pct
+0                       BENIGN  2273097  80.300
+1                     DoS Hulk   231073   8.163
+2                     PortScan   158930   5.614
+3                         DDoS   128027   4.523
+4                DoS GoldenEye    10293   0.364
+5                  FTP-Patator     7938   0.280
+6                  SSH-Patator     5897   0.208
+7                DoS slowloris     5796   0.205
+8             DoS Slowhttptest     5499   0.194
+9                          Bot     1966   0.069
+10    Web Attack � Brute Force     1507   0.053
+11            Web Attack � XSS      652   0.023
+12                Infiltration       36   0.001
+13  Web Attack � Sql Injection       21   0.001
+14                  Heartbleed       11   0.000
+15                       Label        1   0.000
+
+=== Train Distribution ===
+                   class_label  samples     pct
+0                       BENIGN    80394  80.394
+1                     DoS Hulk     8042   8.042
+2                     PortScan     5543   5.543
+3                         DDoS     4603   4.603
+4                DoS GoldenEye      341   0.341
+5                  FTP-Patator      294   0.294
+6                DoS slowloris      219   0.219
+7             DoS Slowhttptest      204   0.204
+8                  SSH-Patator      203   0.203
+9                          Bot       70   0.070
+10    Web Attack � Brute Force       54   0.054
+11            Web Attack � XSS       28   0.028
+12                Infiltration        3   0.003
+13  Web Attack � Sql Injection        2   0.002
+
+=== Test Distribution ===
+                 class_label  samples    pct
+0                     BENIGN     8011  80.11
+1                   DoS Hulk      783   7.83
+2                   PortScan      590   5.90
+3                       DDoS      459   4.59
+4              DoS GoldenEye       38   0.38
+5                FTP-Patator       30   0.30
+6              DoS slowloris       26   0.26
+7                SSH-Patator       23   0.23
+8           DoS Slowhttptest       16   0.16
+9                        Bot       15   0.15
+10  Web Attack � Brute Force        7   0.07
+11          Web Attack � XSS        2   0.02
+Train label counts:
+ label_binary
+0    80394
+1    19606
+Name: count, dtype: int64
+Test label counts:
+ label_binary
+0    8011
+1    1989
+Name: count, dtype: int64
+Class weights: {np.int64(0): np.float64(0.6219369604696868), np.int64(1): np.float64(2.5502397225339184)}
+Training time: 138.65 seconds
+Evaluation time: 5.77 seconds
+
+Test accuracy:     0.9493
+
+Classification report (test):
+               precision    recall  f1-score   support
+
+           0     0.9898    0.9464    0.9676      8011
+           1     0.8167    0.9608    0.8829      1989
+
+    accuracy                         0.9493     10000
+   macro avg     0.9032    0.9536    0.9253     10000
+weighted avg     0.9554    0.9493    0.9508     10000
+
+Confusion matrix (test):
+ [[7582  429]
+ [  78 1911]]
+Saved: rf_nsl_kdd_train_model.pkl and ohe_nsl_kdd.pkl

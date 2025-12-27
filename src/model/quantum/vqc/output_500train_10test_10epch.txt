@@ -1,0 +1,123 @@
+/mnt/slurm_nfs/j32abrah/ece-733-quantum-ml/src/model/quantum/vqc/vqc_quantum.py:234: DeprecationWarning: V1 Primitives are deprecated as of qiskit-machine-learning 0.8.0 and will be removed no sooner than 4 months after the release date. Use V2 primitives for continued compatibility and support.
+  vqc_qnn = EstimatorQNN(
+
+=== Train Distribution ===
+        class_label  samples     pct
+0            normal    67343  53.458
+1           neptune    41214  32.717
+2             satan     3633   2.884
+3           ipsweep     3599   2.857
+4         portsweep     2931   2.327
+5             smurf     2646   2.100
+6              nmap     1493   1.185
+7              back      956   0.759
+8          teardrop      892   0.708
+9       warezclient      890   0.707
+10              pod      201   0.160
+11     guess_passwd       53   0.042
+12  buffer_overflow       30   0.024
+13      warezmaster       20   0.016
+14             land       18   0.014
+15             imap       11   0.009
+16          rootkit       10   0.008
+17       loadmodule        9   0.007
+18        ftp_write        8   0.006
+19         multihop        7   0.006
+20              phf        4   0.003
+21             perl        3   0.002
+22              spy        2   0.002
+
+=== Test Distribution ===
+        class_label  samples     pct
+0            normal     9711  43.076
+1           neptune     4657  20.657
+2      guess_passwd     1231   5.460
+3             mscan      996   4.418
+4       warezmaster      944   4.187
+5           apache2      737   3.269
+6             satan      735   3.260
+7      processtable      685   3.039
+8             smurf      665   2.950
+9              back      359   1.592
+10        snmpguess      331   1.468
+11            saint      319   1.415
+12         mailbomb      293   1.300
+13    snmpgetattack      178   0.790
+14        portsweep      157   0.696
+15          ipsweep      141   0.625
+16       httptunnel      133   0.590
+17             nmap       73   0.324
+18              pod       41   0.182
+19  buffer_overflow       20   0.089
+20         multihop       18   0.080
+21            named       17   0.075
+22               ps       15   0.067
+23         sendmail       14   0.062
+24            xterm       13   0.058
+25          rootkit       13   0.058
+26         teardrop       12   0.053
+27            xlock        9   0.040
+28             land        7   0.031
+29           xsnoop        4   0.018
+30        ftp_write        3   0.013
+31       loadmodule        2   0.009
+32             worm        2   0.009
+33             perl        2   0.009
+34        sqlattack        2   0.009
+35         udpstorm        2   0.009
+36              phf        2   0.009
+37             imap        1   0.004
+
+=== Train Distribution ===
+    class_label  samples   pct
+0        normal      267  53.4
+1       neptune      164  32.8
+2       ipsweep       14   2.8
+3         satan       14   2.8
+4     portsweep       12   2.4
+5         smurf       10   2.0
+6          nmap        6   1.2
+7      teardrop        4   0.8
+8   warezclient        4   0.8
+9          back        4   0.8
+10          pod        1   0.2
+
+=== Test Distribution ===
+  class_label  samples   pct
+0      normal        7  70.0
+1     neptune        1  10.0
+2        nmap        1  10.0
+3     apache2        1  10.0
+Train label counts:
+ label_binary
+0    267
+1    233
+Name: count, dtype: int64
+Test label counts:
+ label_binary
+0    7
+1    3
+Name: count, dtype: int64
+Processed shapes: X_train: (500, 101) X_test: (10, 101)
+Class weights: {np.int64(0): np.float64(0.9363295880149812), np.int64(1): np.float64(1.0729613733905579)}
+PCA fitted -> reduced to 2 dims and saved (pca_nsl_kdd.pkl).
+Torch tensor shapes: X_train: torch.Size([500, 2]) X_test: torch.Size([10, 2])
+Epoch 1/10 — Loss: 0.740315
+Epoch 2/10 — Loss: 0.737326
+Epoch 3/10 — Loss: 0.734542
+Epoch 4/10 — Loss: 0.731728
+Epoch 5/10 — Loss: 0.729098
+Epoch 6/10 — Loss: 0.726691
+Epoch 7/10 — Loss: 0.724305
+Epoch 8/10 — Loss: 0.722003
+Epoch 9/10 — Loss: 0.719929
+Epoch 10/10 — Loss: 0.717910
+Training time: 61.55 seconds
+Logits: tensor([0.3599, 0.1520, 0.3862, 0.2494, 0.3140, 0.2814, 0.3008, 0.3225, 0.0615,
+        0.0592])
+Probabilities: tensor([0.5890, 0.5379, 0.5954, 0.5620, 0.5779, 0.5699, 0.5746, 0.5799, 0.5154,
+        0.5148])
+Predictions: tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1.])
+Test Accuracy: 30.00%
+Evaluation time: 0.01 seconds
+Saved QVC classifier state to vqc_nsl_kdd_torch.pth

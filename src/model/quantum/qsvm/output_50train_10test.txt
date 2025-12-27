@@ -1,0 +1,36 @@
+/mnt/slurm_nfs/j32abrah/ece-733-quantum-ml/src/model/quantum/svm/svm_quantum.py:172: DeprecationWarning: The class ``qiskit.primitives.sampler.Sampler`` is deprecated as of qiskit 1.2. It will be removed no earlier than 3 months after the release date. All implementations of the `BaseSamplerV1` interface have been deprecated in favor of their V2 counterparts. The V2 alternative for the `Sampler` class is `StatevectorSampler`.
+  sampler = Sampler()
+/mnt/slurm_nfs/j32abrah/ece-733-quantum-ml/src/model/quantum/svm/svm_quantum.py:174: DeprecationWarning: V1 Primitives are deprecated as of qiskit-machine-learning 0.8.0 and will be removed no sooner than 4 months after the release date. Use V2 primitives for continued compatibility and support.
+  fidelity = ComputeUncompute(sampler=sampler)
+Train label counts:
+ label_binary
+1    27
+0    23
+Name: count, dtype: int64
+Test label counts:
+ label_binary
+1    6
+0    4
+Name: count, dtype: int64
+Processed shapes: X_train: (50, 61) X_test: (10, 61)
+Class weights: {np.int64(0): np.float64(1.0869565217391304), np.int64(1): np.float64(0.9259259259259259)}
+PCA fitted -> reduced to 2 dims and saved (pca_nsl_kdd.pkl).
+Training time: 1.70 seconds
+Evaluation time: 1.40 seconds
+QSVC classification test score: 0.9
+
+Test accuracy:     0.9
+
+Classification report (test):
+               precision    recall  f1-score   support
+
+           0     0.8000    1.0000    0.8889         4
+           1     1.0000    0.8333    0.9091         6
+
+    accuracy                         0.9000        10
+   macro avg     0.9000    0.9167    0.8990        10
+weighted avg     0.9200    0.9000    0.9010        10
+
+Confusion matrix (test):
+ [[4 0]
+ [1 5]]
