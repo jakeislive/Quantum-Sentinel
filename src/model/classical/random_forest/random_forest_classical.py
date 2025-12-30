@@ -20,7 +20,6 @@ from data.preprocessing import (
     compute_class_weights,
     load_nsl_kdd,
     preprocess_nsl_kdd,
-    show_distribution,
 )
 
 TRAIN_PATH = "src/data/KDDTrain+.txt"
