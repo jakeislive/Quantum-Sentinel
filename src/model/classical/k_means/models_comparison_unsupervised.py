@@ -1,44 +1,28 @@
-#!/usr/bin/env python
-# coding: utf-8
+# Classical Unsupervised Models Comparison - NSL-KDD
 
-# In[1]:
-
-
-import os
-import urllib.request
-import numpy as np
-import pandas as pd
-from sklearn.preprocessing import StandardScaler, OneHotEncoder
-from sklearn.decomposition import PCA
-from sklearn.ensemble import IsolationForest
-from sklearn.svm import OneClassSVM
-from sklearn.neighbors import LocalOutlierFactor
-from sklearn.cluster import KMeans
-from sklearn.metrics import (
-    precision_recall_fscore_support, accuracy_score, classification_report,
-    roc_curve, auc, precision_recall_curve, silhouette_score
-)
-from sklearn.model_selection import train_test_split
-import matplotlib.pyplot as plt
 import warnings
 
-
-# In[2]:
-
-
-from google.colab import files
-uploaded = files.upload()  # file selector
-
-
-# In[3]:
-
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+from sklearn.cluster import KMeans
+from sklearn.decomposition import PCA
+from sklearn.ensemble import IsolationForest
+from sklearn.metrics import (
+    accuracy_score,
+    auc,
+    classification_report,
+    precision_recall_curve,
+    precision_recall_fscore_support,
+    roc_curve,
+    silhouette_score,
+)
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import LocalOutlierFactor
+from sklearn.preprocessing import OneHotEncoder, StandardScaler
+from sklearn.svm import OneClassSVM
 
 RANDOM_STATE = 42
-N_ESTIMATORS = 200
-
-
-# In[15]:
-
 
 colnames = [
         "duration","protocol_type","service","flag","src_bytes","dst_bytes",
@@ -52,10 +36,6 @@ colnames = [
         "label", "difficulty" # Added 'difficulty' to account for the extra column in the dataset
     ]
 
-
-# In[16]:
-
-
 TRAIN_PATH = "./KDDTrain+.txt"
 TEST_PATH  = "./KDDTest+.txt"
 
@@ -65,15 +45,7 @@ df_test  = pd.read_csv(TEST_PATH, names=colnames, sep=",", skipinitialspace=True
 print(df_train.shape, df_test.shape)
 df_train.head()
 
-
-# In[17]:
-
-
 df = pd.concat([df_train, df_test], ignore_index=True)
-
-
-# In[44]:
-
 
 y = (df["label"] != "normal").astype(int).values  # 0 normal, 1 attack
 
@@ -88,10 +60,6 @@ X = np.hstack([X_num, X_cat])
 
 scaler = StandardScaler()
 X_scaled = scaler.fit_transform(X)
-
-
-# In[46]:
-
 
 # Autoencoder helper
 # -----------------------
@@ -112,10 +80,6 @@ def prepare_presumed_normal(X, y=None, contamination_frac=0.3, random_state=42):
         cutoff = np.percentile(scores, 100.0 * contamination_frac)
         X_normal = X[scores >= cutoff]
         return X_normal
-
-
-# In[47]:
-
 
 def build_and_train_autoencoder(X_train_normal, input_dim, latent_dim=8, epochs=50, batch_size=128, patience=5, verbose=0):
     try:
@@ -142,10 +106,6 @@ def build_and_train_autoencoder(X_train_normal, input_dim, latent_dim=8, epochs=
     model.fit(X_train_normal, X_train_normal, epochs=epochs, batch_size=batch_size, callbacks=[es], verbose=verbose)
     return model
 
-
-# In[48]:
-
-
 # Detector wrappers (give anomaly scores and binary preds)
 # -----------------------
 def iso_forest_detector(X_train, X_eval, contamination=0.1, random_state=42):
@@ -158,10 +118,6 @@ def iso_forest_detector(X_train, X_eval, contamination=0.1, random_state=42):
     preds = (scores >= cutoff).astype(int)
     return scores, preds, iso
 
-
-# In[49]:
-
-
 def oneclass_svm_detector(X_train, X_eval, nu=0.05, kernel='rbf', gamma='scale'):
     oc = OneClassSVM(nu=nu, kernel=kernel, gamma=gamma)
     oc.fit(X_train)
@@ -171,20 +127,12 @@ def oneclass_svm_detector(X_train, X_eval, nu=0.05, kernel='rbf', gamma='scale')
     preds = (scores_raw >= np.quantile(scores_raw, 1.0 - nu)).astype(int)
     return scores_raw, preds, oc
 
-
-# In[50]:
-
-
 def autoencoder_detector(model, X_eval, contamination=0.1):
     recon = model.predict(X_eval)
     errors = np.mean(np.square(X_eval - recon), axis=1)
     cutoff = np.quantile(errors, 1.0 - contamination)
     preds = (errors >= cutoff).astype(int)
     return errors, preds
-
-
-# In[51]:
-
 
 # Grid-search tuning
 # -----------------------
@@ -298,10 +246,6 @@ def grid_search_detectors(X_train, y_train, X_val, y_val=None, supervised_tune=T
 
     return results
 
-
-# In[52]:
-
-
 #  Evaluation & plotting
 # -----------------------
 def evaluate_and_plot(name, y_true, scores, preds, ax_pr=None, ax_roc=None):
@@ -332,11 +276,6 @@ def evaluate_and_plot(name, y_true, scores, preds, ax_pr=None, ax_roc=None):
         # but here we just plot a small bar with F1 for comparison
         ax_pr.bar(name, f1)
 
-
-
-# In[53]:
-
-
 # Runner that wires everything together
 # ----------------------- Helpers -----------------------
 def load_preprocess_nslkdd(sample_size=None, pca_components=None, random_state=42):
@@ -360,7 +299,6 @@ def load_preprocess_nslkdd(sample_size=None, pca_components=None, random_state=4
         return X_sample, y_sample, df # df here refers to the original combined dataframe
     else:
         return X_final, y, df
-
 
 def lof_detector(X_train, X_eval, n_neighbors=20, contamination=0.1, novelty=True):
     lof = LocalOutlierFactor(n_neighbors=n_neighbors, contamination=contamination, novelty=novelty)
@@ -500,4 +438,3 @@ def run_experiment(sample_size=3000, pca_components=30, supervised_tune=True, te
 if __name__ == "__main__":
     # adjust sample_size up/down depending on your machine; 3000 is moderate
     RES = run_experiment(sample_size=3000, pca_components=30, supervised_tune=True, test_size=0.2, random_state=42)
-

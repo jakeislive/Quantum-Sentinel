@@ -1,130 +1,47 @@
-#!/usr/bin/env python
-# coding: utf-8
+import sys
+from pathlib import Path
 
-# In[1]:
+# Add parent directory to path for imports
+sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
-
-import pandas as pd
-from sklearn.preprocessing import OneHotEncoder
-from sklearn.model_selection import train_test_split
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import classification_report, confusion_matrix, accuracy_score, roc_auc_score
-from sklearn.utils import compute_class_weight
-import joblib
-import numpy as np
 import time
 
+import joblib
+import numpy as np
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import (
+    accuracy_score,
+    classification_report,
+    confusion_matrix,
+    roc_auc_score,
+)
 
-# In[2]:
+from data.preprocessing import (
+    compute_class_weights,
+    load_nsl_kdd,
+    preprocess_nsl_kdd,
+    show_distribution,
+)
 
-
-TRAIN_PATH = "../../../data/KDDTrain+.txt"   
-TEST_PATH  = "../../../data/KDDTest+.txt"    
+TRAIN_PATH = "src/data/KDDTrain+.txt"
+TEST_PATH = "src/data/KDDTest+.txt"
 RANDOM_STATE = 42
 N_ESTIMATORS = 200
 
-
-# In[3]:
-
-
-columns = [
-    "duration","protocol_type","service","flag","src_bytes","dst_bytes","land",
-    "wrong_fragment","urgent","hot","num_failed_logins","logged_in","num_compromised",
-    "root_shell","su_attempted","num_root","num_file_creations","num_shells",
-    "num_access_files","num_outbound_cmds","is_host_login","is_guest_login",
-    "count","srv_count","serror_rate","srv_serror_rate","rerror_rate","srv_rerror_rate",
-    "same_srv_rate","diff_srv_rate","srv_diff_host_rate","dst_host_count",
-    "dst_host_srv_count","dst_host_same_srv_rate","dst_host_diff_srv_rate",
-    "dst_host_same_src_port_rate","dst_host_srv_diff_host_rate","dst_host_serror_rate",
-    "dst_host_srv_serror_rate","dst_host_rerror_rate","dst_host_srv_rerror_rate",
-    "label","difficulty"
-]
-
-
-# In[4]:
-
-
-# ---- utility to load file ----
-def load_nsl_kdd(path):
-    # NSL-KDD files are comma-separated (no header). skipinitialspace helps if spaces after commas.
-    return pd.read_csv(path, header=None, names=columns, sep=",", skipinitialspace=True)
-
-# ---- load train & test ----
+# Load datasets
 df_train = load_nsl_kdd(TRAIN_PATH)
-df_test  = load_nsl_kdd(TEST_PATH)
+df_test = load_nsl_kdd(TEST_PATH)
 
+# Preprocess data
+X_train_proc, X_test_proc, y_train, y_test, ohe = preprocess_nsl_kdd(df_train, df_test)
 
-# In[5]:
-
-
-# ---- label mapping: binary ----
-df_train["label_binary"] = df_train["label"].apply(lambda s: 0 if s.strip() == "normal" else 1)
-df_test["label_binary"]  = df_test["label"].apply(lambda s: 0 if s.strip() == "normal" else 1)
-
-print("Train label counts:\n", df_train["label_binary"].value_counts(normalize=False))
-print("Test label counts:\n", df_test["label_binary"].value_counts(normalize=False))
-
-
-# In[6]:
-
-
-# ---- feature/target split ----
-y_train = df_train["label_binary"]
-y_test  = df_test["label_binary"]
-
-X_train = df_train.drop(columns=["label", "difficulty", "label_binary"])
-X_test  = df_test.drop(columns=["label", "difficulty", "label_binary"])
-
-
-# In[7]:
-
-
-# ---- categorical columns ----
-cat_cols = ["protocol_type", "service", "flag"]
-
-# ---- fit OneHotEncoder on train and transform both (handle unknown categories in test) ----
-ohe = OneHotEncoder(sparse_output=False, handle_unknown="ignore")
-ohe.fit(X_train[cat_cols])
-
-
-X_train_ohe = pd.DataFrame(
-    ohe.transform(X_train[cat_cols]),
-    columns=ohe.get_feature_names_out(cat_cols),
-    index=X_train.index
-)
-X_test_ohe = pd.DataFrame(
-    ohe.transform(X_test[cat_cols]),
-    columns=ohe.get_feature_names_out(cat_cols),
-    index=X_test.index
-)
-
-
-# In[8]:
-
-
-# ---- drop original categorical columns and concat encoded columns ----
-X_train_num = X_train.drop(columns=cat_cols).reset_index(drop=True)
-X_test_num  = X_test.drop(columns=cat_cols).reset_index(drop=True)
-
-X_train_proc = pd.concat([X_train_num, X_train_ohe.reset_index(drop=True)], axis=1)
-X_test_proc  = pd.concat([X_test_num,  X_test_ohe.reset_index(drop=True)], axis=1)
-
+print("Train label counts:\n", y_train.value_counts(normalize=False))
+print("Test label counts:\n", y_test.value_counts(normalize=False))
 print("Processed shapes: X_train:", X_train_proc.shape, "X_test:", X_test_proc.shape)
 
-
-# In[9]:
-
-
-# ---- ensure ordering / dtypes consistent ----
-X_test_proc = X_test_proc.reindex(columns=X_train_proc.columns, fill_value=0)
-
-classes = np.unique(y_train)
-class_weights = compute_class_weight("balanced", classes=classes, y=y_train)
-class_weight_dict = {c: w for c, w in zip(classes, class_weights)}
+# Compute class weights
+class_weight_dict = compute_class_weights(y_train)
 print("Class weights:", class_weight_dict)
-
-
-# In[10]:
 
 start = time.time()
 # ---- train Random Forest on TRAIN SET ----
@@ -137,9 +54,6 @@ clf = RandomForestClassifier(
 clf.fit(X_train_proc, y_train)
 end = time.time()
 print(f"Training time: {end - start:.2f} seconds")
-
-# In[11]:
-
 
 start = time.time()
 # ---- evaluate on TEST SET ----
@@ -159,18 +73,7 @@ if y_proba is not None and len(np.unique(y_test)) == 2:
 print("\nClassification report (test):\n", classification_report(y_test, y_pred, digits=4))
 print("Confusion matrix (test):\n", confusion_matrix(y_test, y_pred))
 
-
-# In[12]:
-
-
 # ---- save model & encoder ----
 joblib.dump(clf, "rf_nsl_kdd_train_model.pkl")
 joblib.dump(ohe, "ohe_nsl_kdd.pkl")
 print("Saved: rf_nsl_kdd_train_model.pkl and ohe_nsl_kdd.pkl")
-
-
-# In[ ]:
-
-
-
-

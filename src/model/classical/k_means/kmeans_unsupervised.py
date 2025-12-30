@@ -1,32 +1,16 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[48]:
-
-
 # Classical K-means Anomaly Detection - NSL-KDD
-# ========================
 
-import pandas as pd
-import numpy as np
-from sklearn.preprocessing import OneHotEncoder, StandardScaler
-from sklearn.cluster import KMeans
-from sklearn.metrics import roc_auc_score, precision_recall_fscore_support, roc_curve
-from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+from sklearn.cluster import KMeans
+from sklearn.metrics import precision_recall_fscore_support, roc_auc_score, roc_curve
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
-
-# In[49]:
-
-
-TRAIN_PATH = "../../../data/KDDTrain+.txt"   
-TEST_PATH  = "../../../data/KDDTest+.txt"    
+TRAIN_PATH = "../../../data/KDDTrain+.txt"
+TEST_PATH  = "../../../data/KDDTest+.txt"
 RANDOM_STATE = 42
-N_ESTIMATORS = 200
-
-
-# In[51]:
-
 
 columns = [
         "duration","protocol_type","service","flag","src_bytes","dst_bytes",
@@ -40,29 +24,17 @@ columns = [
         "label", "difficulty"
     ]
 
-
-# In[52]:
-
-
-df_train = pd.read_csv(TRAIN_PATH, header=None, names=colnames,sep=",", skipinitialspace=True)
-df_test = pd.read_csv(TEST_PATH, header=None, names=colnames,sep=",", skipinitialspace=True)
+df_train = pd.read_csv(TRAIN_PATH, header=None, names=columns, sep=",", skipinitialspace=True)
+df_test = pd.read_csv(TEST_PATH, header=None, names=columns, sep=",", skipinitialspace=True)
 df = pd.concat([df_train, df_test], ignore_index=True)
 
 print(df_train.shape, df_test.shape)
 df_train.head()
 
-
-# In[53]:
-
-
 # Convert labels to normal/anomaly
 df["binary_label"] = df["label"].apply(lambda x: 0 if x == "normal" else 1)
 
 print("Dataset Loaded:", df.shape)
-
-
-# In[54]:
-
 
 # ----------------------------------------
 # Preprocess Data
@@ -71,24 +43,12 @@ print("Dataset Loaded:", df.shape)
 cat_cols = ["protocol_type", "service", "flag"]
 num_cols = [c for c in df.columns if c not in cat_cols + ["label", "binary_label"]]
 
-
-# In[57]:
-
-
 # Encode categorical
 enc = OneHotEncoder(sparse_output=False, handle_unknown="ignore")
 X_cat = enc.fit_transform(df[cat_cols])
 
-
-# In[58]:
-
-
 # Numeric processing
 X_num = df[num_cols].apply(pd.to_numeric, errors='coerce').fillna(0).values
-
-
-# In[59]:
-
 
 # Scale numeric
 scaler = StandardScaler()
@@ -99,10 +59,6 @@ X = np.hstack([X_num_scaled, X_cat])
 y = df["binary_label"].values
 
 print("Feature matrix:", X.shape)
-
-
-# In[60]:
-
 
 # ----------------------------------------
 # Split for tuning threshold (unsupervised training)
@@ -116,10 +72,6 @@ X_train, X_val, y_train, y_val = train_test_split(
     X, y, test_size=0.25, random_state=42, stratify=y
 )
 
-
-# In[61]:
-
-
 # ----------------------------------------
 # Train K-means on normal-only data
 # ----------------------------------------
@@ -130,10 +82,6 @@ kmeans.fit(X_normal)
 
 centroid = kmeans.cluster_centers_[0]
 
-
-# In[62]:
-
-
 # ----------------------------------------
 # Compute anomaly scores (distance from centroid)
 # ----------------------------------------
@@ -142,10 +90,6 @@ def anomaly_score(X):
     return np.linalg.norm(X - centroid, axis=1)
 
 scores_val = anomaly_score(X_val)
-
-
-# In[63]:
-
 
 # ----------------------------------------
 # Choose threshold using validation set
@@ -167,10 +111,6 @@ for p in percentiles:
 print("Best threshold:", best_threshold)
 print("Best validation F1:", best_f1)
 
-
-# In[66]:
-
-
 # ----------------------------------------
 # Final evaluation on full test set
 # ----------------------------------------
@@ -189,10 +129,6 @@ print("F1 Score:", f1)
 print("ROC-AUC:", auc)
 print("Accuracy:", accuracy)  # NEW
 
-
-# In[67]:
-
-
 # ----------------------------------------
 # Plot ROC Curve
 # ----------------------------------------
@@ -205,10 +141,3 @@ plt.ylabel("True Positive Rate")
 plt.title("K-means Anomaly Detection - ROC Curve")
 plt.grid()
 plt.show()
-
-
-# In[ ]:
-
-
-
-
