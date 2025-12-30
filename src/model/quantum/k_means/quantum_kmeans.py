@@ -1,44 +1,23 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[21]:
-
-
 # Quantum K-means Anomaly Detection - NSL-KDD
-# ========================
-# ---------------------------
-# 1)import clasical & qiskit library & Quantum Library
-# ---------------------------
-import os
+# 1) Import classical & qiskit library & Quantum Library
+
+import math
+
 import numpy as np
 import pandas as pd
-from sklearn.preprocessing import StandardScaler, OneHotEncoder
-from sklearn.decomposition import PCA
-from sklearn.cluster import KMeans
-from sklearn.metrics import precision_recall_fscore_support, accuracy_score, classification_report
-from tqdm import tqdm
-import math
-import urllib.request
-
-# Qiskit imports
-from qiskit import QuantumCircuit
-from qiskit.circuit.library import ZZFeatureMap, PauliFeatureMap, ZFeatureMap, EfficientSU2
-from qiskit import transpile
-from qiskit_aer import Aer
+from qiskit import QuantumCircuit, transpile
+from qiskit.circuit.library import EfficientSU2, PauliFeatureMap, ZFeatureMap, ZZFeatureMap
 from qiskit.quantum_info import Statevector
+from qiskit_aer import Aer
+from sklearn.cluster import KMeans
+from sklearn.decomposition import PCA
+from sklearn.metrics import accuracy_score, classification_report, precision_recall_fscore_support
+from sklearn.preprocessing import OneHotEncoder, StandardScaler
+from tqdm import tqdm
 
-
-# In[22]:
-
-
-TRAIN_PATH = "../../../data/KDDTrain+.txt"   
-TEST_PATH  = "../../../data/KDDTest+.txt"     
+TRAIN_PATH = "../../../data/KDDTrain+.txt"
+TEST_PATH  = "../../../data/KDDTest+.txt"
 RANDOM_STATE = 42
-N_ESTIMATORS = 200
-
-
-# In[23]:
-
 
 columns = [
         "duration","protocol_type","service","flag","src_bytes","dst_bytes",
@@ -52,20 +31,12 @@ columns = [
         "label", "difficulty"
     ]
 
-
-# In[24]:
-
-
 df_train = pd.read_csv(TRAIN_PATH, header=None, names=columns,sep=",", skipinitialspace=True)
 df_test = pd.read_csv(TEST_PATH, header=None, names=columns,sep=",", skipinitialspace=True)
 df = pd.concat([df_train, df_test], ignore_index=True)
 
 print(df_train.shape, df_test.shape)
 df_train.head()
-
-
-# In[25]:
-
 
 # ---------------------------
 # 2) Load & preprocess NSL-KDD
@@ -112,10 +83,6 @@ def load_nsl_kdd(data_folder="data", train_file="KDDTrain+.txt", test_file="KDDT
         y = y[idx]
     return X, y
 
-
-# In[26]:
-
-
 # ---------------------------
 # 3) Reduce dimensions (PCA) to fit into n_qubits
 # ---------------------------
@@ -132,10 +99,6 @@ def reduce_dimensionality(X, n_qubits=4):
     X_scaled = (X_std - X_std.min()) / (X_std.max() - X_std.min() + 1e-9)  # [0,1]
     X_angles = X_scaled * math.pi  # map to [0, pi]
     return X_angles, pca
-
-
-# In[27]:
-
 
 # ---------------------------
 # 4) Build quantum feature map & compute kernel matrix (statevector fidelity)
@@ -189,10 +152,6 @@ def compute_kernel_matrix(X_angles, feature_map, backend=None):
             K[j, i] = Kij
     return K
 
-
-# In[28]:
-
-
 # ---------------------------
 # 5) Kernel KMeans implementation (works with precomputed kernel matrix)
 # ---------------------------
@@ -244,10 +203,6 @@ def kernel_kmeans(K, n_clusters=2, max_iter=100, tol=1e-6, random_state=42):
         labels = new_labels
     return labels
 
-
-# In[29]:
-
-
 # ---------------------------
 # 6) Anomaly decision from cluster labels (k=2 default)
 # ---------------------------
@@ -268,10 +223,6 @@ def cluster_labels_to_anomaly(labels, y_true):
         mapping[c] = majority
     preds = np.array([mapping[c] for c in labels])
     return preds, mapping
-
-
-# In[30]:
-
 
 # ---------------------------
 # 7) Putting it all together
@@ -309,7 +260,7 @@ def quantum_kernel_kmeans_pipeline(sample_size=600, n_qubits=4, reps=1, map_type
     print("Classical KMeans baseline on PCA reduced features (Euclidean)")
     # Use the same PCA features before angle scaling by inverse transform
     # compute PCA on the original X again but with same n_qubits
-    # use X_angles but treat it as vector features 
+    # use X_angles but treat it as vector features
     km = KMeans(n_clusters=k_clusters, random_state=42).fit(X_angles)
     labels_c = km.labels_
     preds_c, mapping_c = cluster_labels_to_anomaly(labels_c, y)
@@ -330,31 +281,19 @@ def quantum_kernel_kmeans_pipeline(sample_size=600, n_qubits=4, reps=1, map_type
 # ---------------------------
 if __name__ == "__main__":
     # tune these to compute/time budget:
-    SAMPLE_SIZE = 600    
+    SAMPLE_SIZE = 600
     N_QUBITS = 4         # number of qubits / PCA components (4 qubits -> 16-dim statevector)
     REPS = 1
     MAP_TYPE = "zz"      # 'zz' recommended
     results = quantum_kernel_kmeans_pipeline(sample_size=SAMPLE_SIZE, n_qubits=N_QUBITS, reps=REPS, map_type=MAP_TYPE, k_clusters=2)
 
-
-# In[33]:
-
-
 import matplotlib.pyplot as plt
 from sklearn.metrics import roc_curve, roc_auc_score, precision_recall_curve
-
-
-# In[34]:
-
 
 # Extract predictions and true labels
 y_true = results['y']
 preds_q = results['preds_q']
 preds_c = results['preds_c']
-
-
-# In[36]:
-
 
 # --- 1) ROC Curve ---
 # We'll treat cluster label 1 as anomaly "score" for ROC (binary label)
@@ -375,10 +314,6 @@ plt.legend(loc='lower right')
 plt.grid(True)
 plt.show()
 
-
-# In[37]:
-
-
 # --- 2) Precision-Recall Curve ---
 precision_q, recall_q, _ = precision_recall_curve(y_true, preds_q)
 precision_c, recall_c, _ = precision_recall_curve(y_true, preds_c)
@@ -393,10 +328,6 @@ plt.legend()
 plt.grid(True)
 plt.show()
 
-
-# In[38]:
-
-
 # --- 3) Histogram of Predicted Anomalies ---
 plt.figure(figsize=(8,6))
 plt.hist(preds_q[y_true==0], bins=2, alpha=0.6, label='Normal', color='green')
@@ -407,10 +338,6 @@ plt.title('Quantum K-Means Predicted Anomaly Distribution')
 plt.legend()
 plt.show()
 
-
-# In[39]:
-
-
 plt.figure(figsize=(8,6))
 plt.hist(preds_c[y_true==0], bins=2, alpha=0.6, label='Normal', color='green')
 plt.hist(preds_c[y_true==1], bins=2, alpha=0.6, label='Anomaly', color='red')
@@ -419,10 +346,3 @@ plt.ylabel('Count')
 plt.title('Classical K-Means Predicted Anomaly Distribution')
 plt.legend()
 plt.show()
-
-
-# In[ ]:
-
-
-
-
