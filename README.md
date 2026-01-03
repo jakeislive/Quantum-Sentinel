@@ -203,6 +203,29 @@ Replace the directory and filename with the desired model to run different exper
 
 ## Results & Visualizations
 
+### Key Findings
+
+* **Classical Models**: Demonstrate superior accuracy (>99%) on CIC-IDS2017 with fast training times
+* **Quantum Models**: Show promise with 75-85% accuracy on NSL-KDD, competitive on smaller datasets
+* **Scalability**: Quantum K-Means shows excellent scalability characteristics
+* **Trade-offs**: Quantum models require longer training times but may offer advantages in specific scenarios (small data, specific attack patterns)
+
+
+#### Algorithm Performance Summary
+
+| Model | Type | Accuracy | F1-Score |
+|-------|------|----------|----------|
+| Decision Tree | Classical | 0.7853 | 0.7742 |
+| Random Forest | Classical | 0.7648 | 0.7462 |
+| SVM (RBF) | Classical | 0.7886 | 0.7868 |
+| K-Means | Classical | 0.6000 | 0.8408 |
+| VQC | Quantum | 0.6900 | 0.6400 |
+| QCNN | Quantum | 0.8000 | 0.8100 |
+| QSVM | Quantum | 0.7500 | 0.7222 |
+| Quantum K-Means | Quantum | 0.8480 | 0.8216 |
+
+---
+
 ### NSL-KDD Dataset Results
 
 #### Classical Models Performance
@@ -254,6 +277,8 @@ Quantum K-Means demonstrates excellent scalability with consistent performance a
 
 Classical SVM with RBF kernel achieves the best accuracy among different kernel types, though with moderate training time.
 
+---
+
 ### CIC-IDS2017 Dataset Results
 
 #### Classical Models - CIC-IDS2017
@@ -267,13 +292,6 @@ On the CIC-IDS2017 dataset, classical models maintain excellent performance with
 ![Quantum Models Accuracy - CIC-IDS](src/plot/quantum_accuracy_cicids.png)
 
 Quantum models show promising results on CIC-IDS2017, with QSVM and Quantum K-Means achieving competitive accuracy scores.
-
-### Key Findings
-
-* **Classical Models**: Demonstrate superior accuracy (>99%) on CIC-IDS2017 with fast training times
-* **Quantum Models**: Show promise with 75-85% accuracy on NSL-KDD, competitive on smaller datasets
-* **Scalability**: Quantum K-Means shows excellent scalability characteristics
-* **Trade-offs**: Quantum models require longer training times but may offer advantages in specific scenarios (small data, specific attack patterns)
 
 ---
 
