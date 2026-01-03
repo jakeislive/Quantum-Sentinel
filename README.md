@@ -213,16 +213,16 @@ Replace the directory and filename with the desired model to run different exper
 
 #### Algorithm Performance Summary
 
-| Model | Type | Accuracy | F1-Score |
-|-------|------|----------|----------|
-| Decision Tree | Classical | 0.7853 | 0.7742 |
-| Random Forest | Classical | 0.7648 | 0.7462 |
-| SVM (RBF) | Classical | 0.7886 | 0.7868 |
-| K-Means | Classical | 0.6000 | 0.8408 |
-| VQC | Quantum | 0.6900 | 0.6400 |
-| QCNN | Quantum | 0.8000 | 0.8100 |
-| QSVM | Quantum | 0.7500 | 0.7222 |
-| Quantum K-Means | Quantum | 0.8480 | 0.8216 |
+Model | Type | Accuracy | F1-Score |
+-------|------|----------|----------|
+Decision Tree | Classical | 0.7853 | 0.7742 |
+Random Forest | Classical | 0.7648 | 0.7462 |
+SVM (RBF) | Classical | 0.7886 | 0.7868 |
+K-Means | Classical | 0.6000 | 0.8408 |
+VQC | Quantum | 0.6900 | 0.6400 |
+QCNN | Quantum | 0.8000 | 0.8100 |
+QSVM | Quantum | 0.7500 | 0.7222 |
+Quantum K-Means | Quantum | 0.8480 | 0.8216 |
 
 ---
 
